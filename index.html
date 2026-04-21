@@ -266,14 +266,14 @@ body::after{content:'';position:fixed;bottom:-200px;left:-100px;width:500px;heig
    KONFIGURASI FIREBASE — GANTI 7 NILAI DI BAWAH INI DENGAN MILIK ANDA
    ======================================================================== */
 var FIREBASE_CONFIG = {
- apiKey: "AIzaSyDuWo23dp3VDjT9D7ClYFZxPlaKr77PsGI",
-  authDomain: "tabunganku230.firebaseapp.com",
-  databaseURL: "https://tabunganku230-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "tabunganku230",
-  storageBucket: "tabunganku230.firebasestorage.app",
-  messagingSenderId: "593416333881",
-  appId: "1:593416333881:web:3ed334bd50262186267be8",
-  measurementId: "G-DC77FQG6W9"
+  apiKey: "AIzaSyC-rZShRQKff-_wbvO7QmGkJJf0Vfvc-a0",
+  authDomain: "tabunganku230-e0f9d.firebaseapp.com",
+  databaseURL: "https://tabunganku230-e0f9d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "tabunganku230-e0f9d",
+  storageBucket: "tabunganku230-e0f9d.firebasestorage.app",
+  messagingSenderId: "339532952704",
+  appId: "1:339532952704:web:e80ed71f6cdec93fe4e265",
+  measurementId: "G-5J4K0BEZRW"
 };
 /* Jalur di database Firebase untuk menyimpan data */
 var DB_PATH = "fintrack_data";
@@ -485,8 +485,7 @@ function saveCurr(){var co=document.getElementById('fCCode').value.trim().toUppe
 
 function delCurr(id){var cid='curr_'+id;for(var i=0;i<APP.masuk.length;i++){if(APP.masuk[i].source===cid){showToast('Masih ada transaksi terkait','error');return}}for(var j=0;j<APP.keluar.length;j++){if(APP.keluar[j].source===cid){showToast('Masih ada transaksi terkait','error');return}}for(var k=0;k<APP.currencies.length;k++){if(APP.currencies[k].id===id){APP.currencies.splice(k,1);break}}saveData();refreshAll();showToast('Mata uang dihapus','success')}
 
-function doReset(){APP=defaultData();saveData();closeModal();showToast('Data direset — semua browser akan terupdate','success')}
-
+function doReset(){isSaving=false;APP=defaultData();if(dbRef){dbRef.set(APP).then(function(){setTimeout(function(){location.reload()},500)}).catch(function(err){console.error(err);location.reload()})}else{location.reload()}closeModal();showToast('Data direset, memuat ulang...','info')}
 /* ================================================================
    CHIPS & FILTER
    ================================================================ */
